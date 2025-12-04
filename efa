@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App di Codifica/Decodifica</title>
+<style>
+  /* BODY DARK */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #121212;
+    color: #FFD700; /* giallo oro per il testo */
+  }
+
+  /* CONTAINER */
+  .container {
+    background-color: #1E1E1E; /* dark grey */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); /* ombra gialla oro */
+    width: 90%;
+    max-width: 400px;
+    transition: transform 0.2s;
+  }
+  .container:hover {
+    transform: scale(1.02);
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #FFD700;
+    text-shadow: 0 0 5px #FFD700;
+  }
+
+  input, textarea, button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #FFD700; /* bordo giallo */
+    box-sizing: border-box;
+    background-color: #2A2A2A;
+    color: #FFD700;
+  }
+
+  textarea:focus, input:focus {
+    outline: none;
+    border-color: #FFA500;
+    box-shadow: 0 0 10px #FFD700;
+  }
+
+  button {
+    cursor: pointer;
+    background-color: #FFD700;
+    color: #1E1E1E;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  button:hover {
+    background-color: #FFA500;
+    transform: scale(1.05);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .container {
+      padding: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Codifica / Decodifica</h2>
+  <textarea id="inputText" placeholder="Scrivi il tuo testo qui..." rows="4"></textarea>
+  <input type="text" id="key" placeholder="Inserisci la key">
+  <button onclick="encode()">Codifica</button>
+  <button onclick="decode()">Decodifica</button>
+  <textarea id="outputText" placeholder="Risultato..." rows="4" readonly></textarea>
+</div>
+
+<script>
+  function encode() {
+    var text = document.getElementById('inputText').value;
+    var key = document.getElementById('key').value;
+    if (!key) {
+      alert("Inserisci una key!");
+      return;
+    }
+    var encoded = text.split('').map((c) => String.fromCharCode(c.charCodeAt(0) + key.length)).join('');
+    document.getElementById('outputText').value = encoded;
+  }
+
+  function decode() {
+    var text = document.getElementById('inputText').value;
+    var key = document.getElementById('key').value;
+    if (!key) {
+      alert("Inserisci una key!");
+      return;
+    }
+    var decoded = text.split('').map((c) => String.fromCharCode(c.charCodeAt(0) - key.length)).join('');
+    document.getElementById('outputText').value = decoded;
+  }
+</script>
+
+</body>
+</html>
